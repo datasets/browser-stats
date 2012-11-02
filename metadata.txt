@@ -1,0 +1,14 @@
+[DEFAULT]
+id = browser_stats
+title: W3Schools Browser Statistics (Monthly)
+version: 2008-10
+description:
+ Openness: Source indicates no restrictions on data so licensing as PD.
+source: W3Schools <http://www.w3schools.com/browsers/browsers_stats.asp>
+created: 2008-11-02
+license: OKD Compliant::Open Data Commons Public Domain Dedication and License (PDDL)
+tags: browser statistics usage firefox format-csv
+creator: Rufus Pollock <comments@rufuspollock.org>
+url: http://www.openeconomics.net/store/view/browser_stats 
+download_url: http://www.openeconomics.net/store/browser_stats/data
+download_url_source: http://knowledgeforge.net/econ/hg/tip/file/econdata/browser_stats
