@@ -1,14 +1,17 @@
 import os
 import csv
+import urllib
 
 import dateutil.parser
 
-import swiss as D
-import swiss.tabular
+import datautil as D
+import datautil.tabular
 
 cache = 'cache'
+if not(os.path.exists(cache)):
+    os.makedirs(cache)
+cachepath = os.path.join(cache, 'browser_stats.asp')
 URL = 'http://www.w3schools.com/browsers/browsers_stats.asp'
-retriever = D.Cache(cache)
 
 class Parser:
     def __init__(self):
@@ -17,22 +20,22 @@ class Parser:
         self.results = {}
 
     def execute(self):
-        html = open(retriever.retrieve(URL, force=False))
-        reader = swiss.tabular.HtmlReader()
-        tdata = reader.read(html, table_index=4)
-        # print [ t.data[0] for t in reader.tables ]
+        urllib.urlretrieve(URL, cachepath)
+        html = open(cachepath)
+        reader = datautil.tabular.HtmlReader()
+        tdata = reader.read(html, table_index=0)
         self.parse(tdata)
         self.dump()
 
     def dump(self):
-        tdata = swiss.tabular.TabularData()
+        tdata = datautil.tabular.TabularData()
         tdata.header = ['Date (Year-Month)'] + self.browsers
         self.dates.sort()
         for dd in self.dates:
             row = [dd] + [ self.results[b].get(dd, '') for b in self.browsers ]
             tdata.data.append(row)
         fileobj = file('data.csv', 'w')
-        writer = swiss.tabular.CsvWriter()
+        writer = datautil.tabular.CsvWriter()
         writer.write(tdata, fileobj)
         fileobj.close()
 
@@ -42,6 +45,7 @@ class Parser:
         for idx, row in enumerate(tdata.data):
             if idx == 0 or tdata.data[idx-1][0] == '':
                 self.browsers.update(set(row[1:]))
+        self.browsers.discard('')
         self.browsers = list(self.browsers)
         self.browsers.append('MS (All)')
         self.browsers.append('Opera (All)')
@@ -83,6 +87,9 @@ class Parser:
             self.dates.append(date)
             for idx, value in enumerate(row[1:]):
                 browser = section[0][idx+1]
+                # have some columns with empty name and no entries
+                if browser == '':
+                    continue
                 v = value.replace('%', '')
                 if v: v = float(v)
                 else: v = 0.0
@@ -102,7 +109,7 @@ def test_1():
 import datetime
 def plot():
     import pylab
-    reader = swiss.tabular.CsvReader()
+    reader = datautil.tabular.CsvReader()
     tdata = reader.read(open('data.csv'))
     transposed = zip(*tdata.data)
     dates = transposed[0]
