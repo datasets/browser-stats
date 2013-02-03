@@ -29,7 +29,7 @@ class Parser:
 
     def dump(self):
         tdata = datautil.tabular.TabularData()
-        tdata.header = ['Date (Year-Month)'] + self.browsers
+        tdata.header = ['Date'] + self.browsers
         self.dates.sort()
         for dd in self.dates:
             row = [dd] + [ self.results[b].get(dd, '') for b in self.browsers ]
