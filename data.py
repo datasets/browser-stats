@@ -83,7 +83,7 @@ class Parser:
         year = int(section[0][0])
         for row in section[1:]:
             month = dateutil.parser.parse(row[0]).month
-            date = '%d-%02d' % (year, month)
+            date = '%d-%02d-01' % (year, month)
             self.dates.append(date)
             for idx, value in enumerate(row[1:]):
                 browser = section[0][idx+1]
@@ -101,7 +101,7 @@ def test_1():
     assert len(p.browsers) == 20, len(p.browsers)
     ie7 = p.results['IE7']
     assert len(ie7) == 27, len(ie7)
-    assert ie7['2008-01'] == 21.2, ie7['2008-01']
+    assert ie7['2008-01-01'] == 21.2, ie7['2008-01-01']
     aol = p.results['AOL']
     assert len(aol) == 6, len(aol)
     assert os.path.exists('data.csv')
