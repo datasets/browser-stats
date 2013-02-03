@@ -47,8 +47,6 @@ class Parser:
                 self.browsers.update(set(row[1:]))
         self.browsers.discard('')
         self.browsers = list(self.browsers)
-        self.browsers.append('MS (All)')
-        self.browsers.append('Opera (All)')
         self.browsers.append('Moz (All)')
         self.browsers.sort()
         for k in self.browsers:
@@ -64,20 +62,11 @@ class Parser:
         # add in extra
         for browser,date_dict in self.results.items():
             for dd,v in date_dict.items():
-                if browser.startswith('IE'):
-                    self.results['MS (All)'][dd] = \
-                            self.results['MS (All)'].get(dd, 0) \
-                            + v
                 if browser.startswith('N') or browser in ['Fx', 'Firefox',
                         'Moz', 'Mozilla']:
                     self.results['Moz (All)'][dd] = \
                             self.results['Moz (All)'].get(dd, 0) \
                             + v
-                if browser.startswith('O'):
-                    self.results['Opera (All)'][dd] = \
-                            self.results['Opera (All)'].get(dd, 0) \
-                            + v
-
 
     def parse_section(self, section):
         year = int(section[0][0])
