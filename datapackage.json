@@ -1,0 +1,97 @@
+{
+  "name": "browser-stats",
+  "title": "Web Browser Usage Statistics",
+  "licenses": [
+    {
+      "id": "odc-pddl",
+      "name": "Public Domain Dedication and License",
+      "version": "1.0",
+      "url": "http://opendatacommons.org/licenses/pddl/1.0/"
+    }
+  ],
+  "sources": [{
+    "title": "W3 Schools",
+    "web": "http://www.w3schools.com/browsers/browsers_stats.asp"
+  }],
+  "resources": [
+    {
+      "name": "data",
+      "path": "data.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          {
+            "id": "Date",
+            "description": "",
+            "type": "date"
+          },
+          {
+            "id": "AOL",
+            "description": "",
+            "type": "number"
+          },
+          {
+            "id": "Chrome",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Firefox",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Internet Explorer",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Moz (All)",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Mozilla",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Netscape",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Opera",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Safari",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          }
+        ]
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "Graph",
+      "type": "Graph",
+      "state": {
+        "graphType": "lines-and-points",
+        "group": "Date",
+        "series": [ "Chrome", "Internet Explorer", "Firefox", "Moz (All)" ]
+      }
+    }
+  ]
+}
