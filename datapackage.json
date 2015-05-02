@@ -24,11 +24,13 @@
           {
             "id": "Date",
             "description": "",
+            "format": "yyyy-mm",
             "type": "date"
           },
           {
             "id": "AOL",
             "description": "",
+            "format": "percent",
             "type": "number"
           },
           {
@@ -50,7 +52,7 @@
             "type": "number"
           },
           {
-            "id": "Moz (All)",
+            "id": "Moz-All",
             "description": "",
             "format": "percent",
             "type": "number"
@@ -81,6 +83,52 @@
           }
         ]
       }
+    },
+    {
+      "name": "data-extant.csv",
+      "path": "data-extant.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          {
+            "id": "Date",
+            "description": "",
+            "format": "yyyy-mm",
+            "type": "date"
+          },
+          {
+            "id": "Chrome",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Firefox",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Internet Explorer",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Opera",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          },
+          {
+            "id": "Safari",
+            "description": "",
+            "format": "percent",
+            "type": "number"
+          }
+        ]
+      }
     }
   ],
   "views": [
@@ -90,7 +138,7 @@
       "state": {
         "graphType": "lines-and-points",
         "group": "Date",
-        "series": [ "Chrome", "Internet Explorer", "Firefox", "Moz (All)" ]
+        "series": [ "Chrome", "Internet Explorer", "Firefox", "Safari", "Opera" ]
       }
     }
   ]

@@ -47,7 +47,7 @@ class Parser:
                 self.browsers.update(set(row[1:]))
         self.browsers.discard('')
         self.browsers = list(self.browsers)
-        self.browsers.append('Moz (All)')
+        self.browsers.append('Moz-All')
         self.browsers.sort()
         for k in self.browsers:
             self.results[k] = {}
@@ -64,15 +64,16 @@ class Parser:
             for dd,v in date_dict.items():
                 if browser.startswith('N') or browser in ['Fx', 'Firefox',
                         'Moz', 'Mozilla']:
-                    self.results['Moz (All)'][dd] = \
-                            self.results['Moz (All)'].get(dd, 0) \
+                    self.results['Moz-All'][dd] = \
+                            self.results['Moz-All'].get(dd, 0) \
                             + v
 
     def parse_section(self, section):
         year = int(section[0][0])
         for row in section[1:]:
-            month = dateutil.parser.parse(row[0]).month
-            date = '%d-%02d-01' % (year, month)
+            month = dateutil.parser.parse(row[0], default=datetime.datetime.now()
+                .replace(day=1, hour=0, minute=0, second=0, microsecond=0)).month
+            date = '%d-%02d' % (year, month)
             self.dates.append(date)
             for idx, value in enumerate(row[1:]):
                 browser = section[0][idx+1]
@@ -90,7 +91,7 @@ def test_1():
     assert len(p.browsers) == 20, len(p.browsers)
     ie7 = p.results['IE7']
     assert len(ie7) == 27, len(ie7)
-    assert ie7['2008-01-01'] == 21.2, ie7['2008-01-01']
+    assert ie7['2008-01'] == 21.2, ie7['2008-01']
     aol = p.results['AOL']
     assert len(aol) == 6, len(aol)
     assert os.path.exists('data.csv')
