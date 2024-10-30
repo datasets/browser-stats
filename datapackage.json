@@ -133,10 +133,11 @@
   ],
   "views": [
     {
-      "id": "Graph",
-      "type": "Graph",
-      "state": {
-        "graphType": "lines-and-points",
+      "resources": ["data"],
+      "name": "Browser Stats",
+      "specType": "simple",
+      "spec": {
+        "type": "line",
         "group": "Date",
         "series": [ "Chrome", "Internet Explorer", "Firefox", "Safari", "Opera" ]
       }
